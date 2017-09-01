@@ -55,6 +55,11 @@ RUN cd /tmp \
 	&& chown -R www-data.www-data /var/www/html/* \
 	&& chmod -R 775 /var/www/html/*
 
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+RUN export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+RUN npm install -y http-server -g
+
 COPY 000-default.conf 000-default-auth.conf /etc/apache2/sites-available/
 COPY rtorrent.rc /home/rtorrent/.rtorrent.rc
 COPY plugins/ /var/www/html/plugins/
