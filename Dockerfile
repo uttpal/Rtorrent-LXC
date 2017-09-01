@@ -56,8 +56,8 @@ RUN apt-get update && apt-get -y install openssl git apache2 apache2-utils build
 # 	&& chmod -R 775 /var/www/html/*
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+RUN export NVM_DIR="$HOME/.nvm"
+RUN [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 RUN npm install -y http-server -g
 
