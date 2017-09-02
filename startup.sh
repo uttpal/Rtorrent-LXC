@@ -20,7 +20,7 @@ if [ -f /home/rtorrent/rtorrent-session/rtorrent.lock ]; then
     rm -f /home/rtorrent/rtorrent-session/rtorrent.lock
 fi
 su rtorrent bash -c "/usr/bin/tmux -2 new-session -d -s rtorrent rtorrent"
-su rtorrent bash -c "/usr/bin/tmux -2 new-session -d -s http-server /downloads -p 21"
+su rtorrent bash -c "/usr/bin/tmux -2 new-session -d -s http-server /downloads -p 3000"
 
 if [ -f /var/run/apache2/apache2.pid ]; then
     rm -f /var/ru   n/apache2/apache2.pid
