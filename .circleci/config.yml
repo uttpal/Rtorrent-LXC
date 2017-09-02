@@ -1,13 +1,17 @@
-machine:
-  services:
-    - docker
-
-dependencies:
-  override:
-    - docker info
-    - docker build --rm=false -t mega .
-
-test:
-  override:
-    - docker run -d -p 9200:9200 mega; sleep 10
-    - curl --retry 10 --retry-delay 5 -v http://localhost:9200
+version: 2
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build -t mega .
+      - run:
+          name: Run tests
+          command: |
+            docker-compose -f ./docker-compose.test.yml up
